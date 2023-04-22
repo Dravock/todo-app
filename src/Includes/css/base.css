@@ -1,0 +1,83 @@
+body{
+    @apply bg-black/80
+}
+
+.box-debugger{
+    @apply border border-red-600;
+}
+
+  /* BUTTON STYLING */
+.btn {
+    @apply
+    bg-blue-500
+    hover:bg-blue-400  
+    text-white 
+    font-bold 
+    p-2
+    m-5
+    rounded-sm;
+}
+
+.btn-green {
+    @apply 
+    bg-green-600 
+    hover:bg-green-500
+    font-bold
+    p-2
+    m-5
+    rounded-sm;
+}
+
+.btn-red {
+    @apply
+    text-black 
+    bg-red-500 
+    hover:bg-red-300
+    font-bold
+    p-2
+    m-5
+    rounded-sm;
+}
+
+/* FLOATING HOVER */
+
+
+/* UNDERLINE HOVER EFFECT */
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: #0087ca;
+}
+
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.animate-height{
+    overflow: hidden;
+    max-height: 0px;
+}
+
+.open{
+    transition: 2s max-height ;
+    max-height: 350px;
+}
+
+.closed{
+    transition: 2s max-height ;
+    max-height: 0px;
+}
