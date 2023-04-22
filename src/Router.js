@@ -1,5 +1,5 @@
 // IMPORTS FOR WEBSITE DESIGN
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import App from './Pages/Privat/App';
 import Login from './Pages/Public/Login';
@@ -13,31 +13,19 @@ import Cookies from 'universal-cookie';
 
 function Router() {
 
-  const [userLoggedIn,setUserLoggedIn]=useState(false)
-  const [userData,setUserData] = useState([{role:"",first_name:"",last_name:""}])
-
-  const cookies = new Cookies
+  const cookies = new Cookies()
   const token = cookies.get('token')
 
-  const userDataTest =[{
-    vorname:"deryan",
-    nachname:"keskin",
-    role:"meister"
-  }]
-
-// useEffect(() => {
-//   (async()=>{
-//       try{
-//         if(token !== undefined && token !== null && token !== "" ){
-//           Validation()
-//           setUserLoggedIn(true)
-          
-//         }
-//       } catch (error) {
-//         setUserLoggedIn(false)
-//       }
-//   })() 
-// }, [token])
+useEffect(() => {
+  (async()=>{
+      try{
+        if(token !== undefined && token !== null && token !== "" ){
+          Validation()
+        }
+      } catch (error) {
+      }
+  })() 
+}, [token])
 
 
 
@@ -45,7 +33,7 @@ function Router() {
 
 return (
     <>
-      <BrowserRouter basename='/to-do-app'>
+      <BrowserRouter basename='/todo-app'>
         {/* REACT ROUTER ROUTES */}
         <Routes>
             {/* PUBLIC PAGES */}

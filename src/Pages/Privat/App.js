@@ -1,53 +1,102 @@
-import React, { useState } from 'react'
-import PlusSVG from '../../Includes/img/svg/PlusSVG'
+import React, { useEffect, useState } from 'react'
 import MyToDo from '../../components/MyToDo/MyToDo'
 import NewToDo from '../../components/newToDo/NewToDo'
+import axios from 'axios'
+import { Validation } from '../../functions/Validation'
+import Cookies from 'universal-cookie'
+import { useNavigate } from 'react-router-dom'
+import LoadingState from '../../Includes/enums/LoadingState'
+import LoadingScreen from '../../components/loading_spinner/Loadingscreen'
+import LoadingMessages from '../../Includes/enums/LoadingMessages'
 
 function App() {
+    const cookies = new Cookies()
+    const token = cookies.get('token')
+    const navigate = useNavigate()
 
-    const testData = [{
-        title:"Aufräumen",
-        date:"22.04.2023",
-        task:"Zimmer aufräumen und Fenster putzen",
-        prio:"1"
-    },
-    {
-        title:"HZ-Software",
-        date:"28.04.2023",
-        task:"Software fertigstellen",
-        prio:"2"
-    },
-    {
-        title:"Bayram Feiern",
-        date:"05.04.2023",
-        task:"Feiern mit der Familie ",
-        prio:"3"
-    }
-]
+    const [appData,setAppData] = useState()
+    const [input,setInput] = useState()
+    const [loading,setLoading] = useState(LoadingState.Inactive)
 
-    const [appData,setAppData] = useState(testData)
 
-const getPrioColor = (prio) =>{
-    switch (prio) {
-        case "1":
-            return "bg-green-500"
-        case "2":
-            return "bg-yellow-500"
-        case "3":
-            return "bg-red-500"
-        default:
-            return "bg-blue-500";
-    }
+useEffect(() => {
+        (async()=>{
+            setLoading(LoadingState.Active)
+            try{
+                if(token !== undefined  && token !== "" ){
+                    await  Validation()
+                    await getAppData()
+                    navigate('/app')
+                }
+                return
+            } catch (error) {
+                navigate('/')
+            }
+        })() 
+    }, [token])
+
+const inputListener = (e) =>{
+    const {name,value} = e.target
+    setInput({...input, [name] : value })
+}
+
+const getAppData = async () =>{
+    await axios.get(process.env.REACT_APP_BASE_URL+'/data/data.php',{headers: {'Authorization':"Bearer " + token}})
+    .then((response)=>{
+        setAppData(response.data)
+        setLoading(LoadingState.Inactive)
+    })
+    .catch((err)=>{
+        // setLoading(LoadingState.Active)
+        alert("Messages.error")
+    })
+}
+
+const submit =  (data) =>{
+    axios.post(process.env.REACT_APP_BASE_URL+'/data/data.php',data,{headers: {'Authorization':"Bearer " + token}})
+    .then((response)=>{
+        setLoading(LoadingState.Active)
+        setInput([{title:""}])
+        getAppData()
+    })
+    .catch((err)=>{
+        setLoading(LoadingState.Inactive)
+        alert("Messages.error")
+    })
+    
 }
 
 
+const deleteTodo = (index,row_id) =>{
+    const removed = []
+    appData.filter(function(item) {
+        if(appData[index] !== item){
+            removed.push(item)
+        }
+        return ;
+    });
+    setAppData(removed)
+    axios.delete(process.env.REACT_APP_BASE_URL+`/data/data.php?id=${row_id}`,{headers: {'Authorization':"Bearer " + token}})
+    .then((response)=>{
+
+    })
+    .catch((err)=>{
+        setLoading(LoadingState.Inactive)
+        alert("Messages.error")
+    })
+
+}
+
 
 return (
-    <div className='container bg-slate-500 pb-10 mx-auto'>
-        <h1 className='text-center text-white text-4xl font-bold mt-10 '>You're ToDo APP</h1>
-        <NewToDo />
-        <MyToDo appData={appData} />
-    </div>
+    <>
+        {loading === LoadingState.Active && <LoadingScreen text={LoadingMessages.GeneralWaiting}/>}
+        <div className='container bg-slate-500 h-fit sm:pb-10 mx-auto'>
+            <h1 className='text-center text-white text-4xl font-bold sm:mt-10 pt-5 sm:pt-0 '>You're ToDo APP</h1>
+            <NewToDo submit={submit} input={input} inputListener={inputListener} />
+            <MyToDo appData={appData} deleteTD={deleteTodo} />
+        </div>
+    </>
 )}
 
 export default App

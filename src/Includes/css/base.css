@@ -11,10 +11,14 @@ body{
     @apply
     bg-blue-500
     hover:bg-blue-400  
-    text-white 
-    font-bold 
+    text-white
+    text-base 
+    sm:text-lg
+
+    sm:font-bold 
     p-2
-    m-5
+    sm:m-5
+    m-1
     rounded-sm;
 }
 
@@ -33,9 +37,11 @@ body{
     text-black 
     bg-red-500 
     hover:bg-red-300
-    font-bold
-    p-2
-    m-5
+    sm:font-bold
+    p-1
+    sm:p-2
+    sm:m-5
+    m-1
     rounded-sm;
 }
 
@@ -73,11 +79,11 @@ body{
 }
 
 .open{
-    transition: 2s max-height ;
+    transition: 700ms max-height ;
     max-height: 350px;
 }
 
 .closed{
-    transition: 2s max-height ;
+    transition: 700ms max-height ;
     max-height: 0px;
 }
