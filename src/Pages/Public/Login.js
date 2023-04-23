@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Validation } from '../../functions/Validation.js';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import Messages from '../../Includes/enums/Messages.js';
 
 
 
@@ -51,16 +52,16 @@ const submit = async () =>{
         .then((response)=>{
             const requestedData = response.data
             const options = {
-                // httpOnly: true, //TODO im Online Betrieb auskommentieren
-                // secure: true,
-                path:'/',
+                httpOnly: true, //TODO im Online Betrieb auskommentieren
+                secure: true,
+                path:'/todo-app/',
                 expires: new Date(Date.now() +  1000*60*60*5) 
             }
             cookies.set("token",requestedData)
             navigate('/app')
         })
         .catch((error)=>{
-            alert("Messages.loginFailed.message")
+            alert(Messages.loginFailed.message)
         })
 }
 

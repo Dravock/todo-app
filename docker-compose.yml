@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-    titato_frontend:
+    frontend:
       stdin_open: true
       build:
         context: .
@@ -8,4 +8,3 @@ services:
       ports:
         - 9105:80
 
-        docker compose -f "client/docker-compose.yml" up -d --build
