@@ -68,8 +68,6 @@ const submit =  (data) =>{
     
 }
 
-console.log(input)
-
 const deleteTodo = (index,row_id) =>{
     const removed = []
     appData.filter(function(item) {
