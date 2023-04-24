@@ -34,14 +34,14 @@ return (
                 <div className='content mx-4 mt-7 '>
                     <div className='prefs sm:flex mb-5'>
                         <div className='w-1/2 mb-2 sm:mb-0'>
-                            <input type='text' name="title" className='border border-black rounded w-52 sm:w-68'placeholder='Titel' onChange={inputListener}/>
+                            <input type='text' value={input.title} name="title" className='border border-black rounded w-52 sm:w-68'placeholder='Titel' onChange={inputListener}/>
                         </div>
                         <div className='w-1/3 mb-2 sm:mb-0'>
-                            <input type="date" name="date" className='border border-black rounded w-52 sm:w-40' placeholder='Date' onChange={inputListener}/>
+                            <input type="date"  value={input.date}  name="date" className='border border-black rounded w-52 sm:w-40' placeholder='Date' onChange={inputListener}/>
                         </div>
                         <div className='w-1/5 text-right'>
-                            <select className='rounded'  name="prio" onChange={inputListener}>
-                                <option disabled defaultValue={"No Prio"}>PLS Select</option>
+                            <select className='rounded'  value={input.prio} name="prio" onChange={inputListener}>
+                                <option disabled defaultValue={"No Prio"}> Select</option>
                                 <option value={"1"}>No Prio</option>
                                 <option value={"1"}>1</option>
                                 <option value={"2"}>2</option>
@@ -50,7 +50,7 @@ return (
                         </div>
                     </div>
                     <div className='task-content mt-6'>
-                        <textarea className=' w-full resize-none' name='task' rows="2" placeholder='Please insert here your Task' onChange={inputListener}/>
+                        <textarea className=' w-full resize-none'  value={input.task} name='task' rows="2" placeholder='Please insert here your Task' onChange={inputListener}/>
                     </div>
                     <div className='submit text-center mt-5'>
                         <button className='btn' onClick={()=>submit(input)}>submit</button>

@@ -16,7 +16,7 @@ function App() {
     const navigate = useNavigate()
 
     const [appData,setAppData] = useState()
-    const [input,setInput] = useState()
+    const [input,setInput] = useState({title:"",date:"",prio:"",task:""})
     const [loading,setLoading] = useState(LoadingState.Inactive)
 
 
@@ -50,7 +50,7 @@ const getAppData = async () =>{
         setLoading(LoadingState.Inactive)
     })
     .catch((err)=>{
-        alert("Messages.error")
+        alert(Messages.error)
     })
 }
 
@@ -58,16 +58,17 @@ const submit =  (data) =>{
     axios.post(process.env.REACT_APP_BASE_URL+'/data/data.php',data,{headers: {'Authorization':"Bearer " + token}})
     .then((response)=>{
         setLoading(LoadingState.Active)
-        setInput([{title:""}])
+        setInput({title:"",date:"",prio:"",task:""})
         getAppData()
     })
     .catch((err)=>{
         setLoading(LoadingState.Inactive)
-        alert("Messages.error")
+        alert(Messages.error)
     })
     
 }
 
+console.log(input)
 
 const deleteTodo = (index,row_id) =>{
     const removed = []
@@ -93,7 +94,7 @@ const deleteTodo = (index,row_id) =>{
 return (
     <>
         {loading === LoadingState.Active && <LoadingScreen text={LoadingMessages.GeneralWaiting}/>}
-        <div className='container bg-slate-500 absolute sm:static h-full mx-auto sm:pb-10 '>
+        <div className='container bg-slate-500 absolute sm:static h-screen mx-auto sm:pb-10 '>
             <h1 className='text-center text-white text-4xl font-bold sm:mt-10 pt-5 sm:pt-0 '>You're ToDo APP</h1>
             <NewToDo submit={submit} input={input} inputListener={inputListener} />
             <MyToDo appData={appData} deleteTD={deleteTodo} />
