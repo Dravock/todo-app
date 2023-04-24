@@ -39,8 +39,6 @@ return (
             {/* PUBLIC PAGES */}
             <Route path='/' element={<Login />} />
 
-            {/* NAVBAR LINKS */}
-
             {/* Private Pages */}
             <Route path='/app' element={<App />} />
 
