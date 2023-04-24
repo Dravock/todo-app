@@ -22,7 +22,6 @@ return (
         <div className='bg-white rounded mx-auto mt-10 py-1 w-[95%] sm:w-[75%]'>
             <h2 className=' text-3xl font-bold text-center w-full'>My ToDo's</h2>
         </div>
-        {appData ? <>
             {appData && appData.map(({title,date,task,prio,id},index)=>
             <div className='w-[95%] sm:w-[75%] mx-auto  mb-2 bg-white rounded border border-black' key={index}>
                 <div className='card-header flex flex-row mb-4'>
@@ -46,11 +45,6 @@ return (
                 </div>
             </div>
             )}
-            </>
-            :
-            <h2>You dont have any ToDos</h2>
-        }
-
     </div>
 )}
 

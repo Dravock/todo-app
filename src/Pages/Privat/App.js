@@ -9,6 +9,7 @@ import LoadingState from '../../Includes/enums/LoadingState'
 import LoadingScreen from '../../components/loading_spinner/Loadingscreen'
 import LoadingMessages from '../../Includes/enums/LoadingMessages'
 import Messages from '../../Includes/enums/Messages'
+import Header from '../../components/Header/Header'
 
 function App() {
     const cookies = new Cookies()
@@ -92,8 +93,8 @@ const deleteTodo = (index,row_id) =>{
 return (
     <>
         {loading === LoadingState.Active && <LoadingScreen text={LoadingMessages.GeneralWaiting}/>}
-        <div className='container bg-slate-500 absolute sm:static h-screen mx-auto sm:pb-10 '>
-            <h1 className='text-center text-white text-4xl font-bold sm:mt-10 pt-5 sm:pt-0 '>You're ToDo APP</h1>
+        <div className='container bg-slate-500  min-h-screen sm:h-full mx-auto pb-2 sm:pb-10 '>
+            <Header />
             <NewToDo submit={submit} input={input} inputListener={inputListener} />
             <MyToDo appData={appData} deleteTD={deleteTodo} />
         </div>

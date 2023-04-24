@@ -1,5 +1,7 @@
 .background {
-    height: 100vh;
+    top:0;
+    left: 0;
+    height:100%;
     width: 100vw;
     z-index: 999;
     background-color: rgb(0, 0, 0,0.9);
@@ -39,21 +41,21 @@
     left: 0%;
     top: 0%;
     animation: rotate-one 1s linear infinite;
-    border-bottom: 3px solid #EFEFFA;
+    border-bottom: 3px solid yellow;
 }
 
 .inner.two {
     right: 0%;
     top: 0%;
     animation: rotate-two 1s linear infinite;
-    border-right: 3px solid #EFEFFA;
+    border-right: 3px solid red;
 }
 
 .inner.three {
     right: 0%;
     bottom: 0%;
     animation: rotate-three 1s linear infinite;
-    border-top: 3px solid #EFEFFA;
+    border-top: 3px solid blue;
 }
 
 @keyframes rotate-one {
