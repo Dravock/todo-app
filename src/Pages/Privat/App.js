@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import LoadingState from '../../Includes/enums/LoadingState'
 import LoadingScreen from '../../components/loading_spinner/Loadingscreen'
 import LoadingMessages from '../../Includes/enums/LoadingMessages'
+import Messages from '../../Includes/enums/Messages'
 
 function App() {
     const cookies = new Cookies()
@@ -23,17 +24,19 @@ useEffect(() => {
         (async()=>{
             setLoading(LoadingState.Active)
             try{
-                if(token !== undefined  && token !== "" ){
+                if( token !== undefined  && token !== "" ){
                     await  Validation()
                     await getAppData()
                     navigate('/app')
+                }else{
+                    throw 401
                 }
-                return
             } catch (error) {
+                console.log(error,Messages.unauthorized.message)
                 navigate('/')
             }
         })() 
-    }, [token])
+    }, [])
 
 const inputListener = (e) =>{
     const {name,value} = e.target
@@ -47,7 +50,6 @@ const getAppData = async () =>{
         setLoading(LoadingState.Inactive)
     })
     .catch((err)=>{
-        // setLoading(LoadingState.Active)
         alert("Messages.error")
     })
 }
@@ -91,7 +93,7 @@ const deleteTodo = (index,row_id) =>{
 return (
     <>
         {loading === LoadingState.Active && <LoadingScreen text={LoadingMessages.GeneralWaiting}/>}
-        <div className='container bg-slate-500 h-fit sm:pb-10 mx-auto'>
+        <div className='container bg-slate-500 absolute sm:static h-full mx-auto sm:pb-10 '>
             <h1 className='text-center text-white text-4xl font-bold sm:mt-10 pt-5 sm:pt-0 '>You're ToDo APP</h1>
             <NewToDo submit={submit} input={input} inputListener={inputListener} />
             <MyToDo appData={appData} deleteTD={deleteTodo} />

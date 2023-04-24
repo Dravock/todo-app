@@ -29,18 +29,20 @@ return (
                     <PlusSVG w={"30"} h={"30"}/>
                 </div>
             </div>
+            
             <div id="new-ToDo-body" className='new-todo-body relative bg-slate-100  animate-height  closed'>
                 <div className='content mx-4 mt-7 '>
                     <div className='prefs sm:flex mb-5'>
                         <div className='w-1/2 mb-2 sm:mb-0'>
-                            <input type='text' name="title" className='border border-black rounded'placeholder='Titel' onChange={inputListener}/>
+                            <input type='text' name="title" className='border border-black rounded w-52 sm:w-68'placeholder='Titel' onChange={inputListener}/>
                         </div>
                         <div className='w-1/3 mb-2 sm:mb-0'>
-                            <input type="date" name="date" className='border border-black rounded' placeholder='Date' onChange={inputListener}/>
+                            <input type="date" name="date" className='border border-black rounded w-52 sm:w-40' placeholder='Date' onChange={inputListener}/>
                         </div>
                         <div className='w-1/5 text-right'>
                             <select className='rounded'  name="prio" onChange={inputListener}>
-                                <option>Prio</option>
+                                <option disabled defaultValue={"No Prio"}>PLS Select</option>
+                                <option value={"1"}>No Prio</option>
                                 <option value={"1"}>1</option>
                                 <option value={"2"}>2</option>
                                 <option value={"3"}>3</option>
