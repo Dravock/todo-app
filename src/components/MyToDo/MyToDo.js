@@ -1,4 +1,5 @@
 import React from 'react'
+import TrashcanSVG from '../../Includes/img/svg/TrashcanSVG';
 
 function MyToDo(props) {
     const { appData, deleteTD }= props
@@ -31,16 +32,16 @@ return (
                 </div>
 
                 <div className='card-body flex sm:mx-5 mb-4'>
-                    <div className='task w-full border border-black '>
+                    <div className='task w-[88%] border border-black '>
                         <ul>
                             <li>
                                 <h3 className='text-2xl ml-3 sm:ml-16'>- {task}</h3>
                             </li>
                         </ul>
                     </div>
-                    <div className=' button-area w-[20%]  text-center'>
+                    <div className=' button-area w-[10%] mx-auto text-center'>
                         {/* <button className="btn  rounded w-[80%]  ">New Date</button> */}
-                        <button className="btn btn-red rounded mx-auto w-[80%]" onClick={()=>deleteTD(index,id)}>Delete</button>
+                        <button className="btn btn-red rounded mx-auto" onClick={()=>deleteTD(index,id)}><TrashcanSVG w={'25px'} h={'25px'}/>  </button>
                     </div>
                 </div>
             </div>
