@@ -18,10 +18,10 @@ return (
         <div className='w-1/5 items'>
         </div>
         <div className='w-full '>
-        <h1 className='text-center text-lg sm:text-4xl font-bold mt-1 ml-8 sm:ml-15'>You're ToDo App</h1>
+        <h1 className='text-center text-lg sm:text-4xl font-bold mt-1 ml-10 sm:ml-15'>You're ToDo App</h1>
         </div>
         <div className='w-1/5 '>
-            <button className='bg-red-500 rounded px-1 m-1 sm:mt-2 sm:ml-6 font-bold' onClick={() =>logout()}>Logout</button>
+            <button className='bg-red-500 rounded px-1 m-1 sm:mt-2 mr-4 sm:ml-6 font-bold' onClick={() =>logout()}>Logout</button>
         </div>
     </div>
 )}
